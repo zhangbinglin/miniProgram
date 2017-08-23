@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="body">
+    <view class="itemTitle">待签约居民</view>
+    <view class="waitForSign">
+      <view class='cicleBody'>
+        <block wx:for='{{queryFamilyArrStatus24}}'>
+          <view class="items">
+            <image src="../../assets/img/zbl_avatar.png" wx:if='{{!item.avatar}}' bindtap='waitForSign' data-item='{{item}}' class='personAvatar' />
+            <image src="{{imgReqUrl + item.avatar}}" wx:else bindtap='waitForSign' data-item='{{item}}' class='personAvatar' />
+            <text class="personName">{{item.personName}}</text>
+          </view>
+        </block>
+        <view class="items addIcon">
+          <image src="../../assets/img/zbl_add.png" bindtap='addFamily' />
+          <text class="personName">添加</text>
+        </view>
+      </view>
+
+      <view class="text">点击待签约居民头像进行签约</view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="itemTitle">签约中/已签约居民</view>
+    <view class="signingAndSigned">
+      <view class='cicleBody'>
+        <block wx:for="{{queryFamilyArrStatus1}}">
+          <view class="items">
+            <image src="../../assets/img/zbl_avatar.png" wx:if='{{!item.avatar}}' id='{{index}}' bindtap='signingAndSigned' class='personAvatar'/>
+            <image src="{{imgReqUrl + item.avatar}}" wx:else id='{{index}}' bindtap='signingAndSigned' class='personAvatar'/>
+            <text class="personName">{{item.personName}}</text>
+            <!-- <mt-badge size="small" color="#888" v-if='item.status === "1"'>签约中</mt-badge>
+                  <mt-badge size="small" color="#888" v-if='item.status === "2"' class="badgeGreen">已签约</mt-badge> -->
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="signIntroduction">每个居民只能签约一个家庭医生，签约周期内不能重复签约</view>
+    <view class="signProcess">
+      <image src="../../assets/img/zbl_signProcess.png" />
+    </view>
+  </view>
+</view>

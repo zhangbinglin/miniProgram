@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/signstatus/signstatus",
+    "pages/dosign/dosign",
+    "pages/signinginfo/signinginfo"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "welcome",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": false
+  }
+}
