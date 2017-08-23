@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/city-picker/city-picker",
+    "pages/address-tpl/address-tpl",
     "pages/signstatus/signstatus",
     "pages/dosign/dosign",
     "pages/signinginfo/signinginfo"

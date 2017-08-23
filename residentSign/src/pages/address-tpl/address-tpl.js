@@ -1,36 +1,24 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+let util = require('../../utils/util.js')
 // 创建页面实例对象
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
-    dosignPersonInfo: {},
-    imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/',
-    sexImg: ['../../assets/img/zbl_male.png', '../../assets/img/zbl_female.png'],
-    personAge: ''
+    title: 'address-tpl'
+  },
+  pickerProvinceCity(e) {
+      console.log(e);
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad (options) {
-    this.setData({
-      dosignPersonInfo: JSON.parse(wx.getStorageSync('dosignPersonInfo'))
-    })
-    this.setData({
-        personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0]
-    })
-    console.log(this.data.dosignPersonInfo)
+  onLoad () {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady () {
-    // TODO: onReady
+    util.cityPicker()
   },
 
   /**

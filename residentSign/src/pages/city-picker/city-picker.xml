@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="input">
+        <input placeholder="选择" value="{{province}} {{city}} {{county}}" focus="{{focus}}" bindfocus="open" />
+        <input placeholder="选择街道" value="{{selectedStreetText}}" bindtap="openActionsheet" />
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入详细地址" style="height: 3.5em" />
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='areaAjaxResult' wx:if='{{areaAjaxResultShow}}'>
+        <block wx:for='{{areaAjaxResultArr}}'>
+            <view class='item' bindtap='selectedStreet' data-region='{{item}}'>{{item.regionText}}</view>
+        </block>
+    </view>
+</view>
+
+<view wx:if="{{condition}}" class="citypicker">
+    <picker-view indicator-style="height: 30px;" style="width: 100%; height: 200px;" value="{{value}}" bindchange="bindChange" class="citybody">
+        <view class="cityheader">
+            <view bindtap="open" class="city-cancel">取消</view>
+            <view bindtap="open" class="city-true">确定</view>
+        </view>
+        <picker-view-column>
+            <view wx:for="{{provinces}}" wx:key="item" style="line-height: 30px;padding-left:20px;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view wx:for="{{citys}}" wx:key="item" style="line-height: 30px;padding-left:10px;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view wx:for="{{countys}}" wx:key="item" style="line-height: 30px;padding-left:10px;">{{item}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>

@@ -16,9 +16,22 @@ function commonAjaxKy(params, ServiceId, ServiceMethod) {
       }
     })
   })
-  // return Promise.all([promise]).then(res => {
-  //   console.log(res);
-  // })
+}
+
+function areaAjax(params) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${base}/pcn-core/dataProxyController/dictionaryServiceProxy?short_url=hcn.base.dictionary.region.dic?${params}`,
+        data: {},
+        header: {
+          "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
+          "Content-Type": "application/json"
+        },
+        success: function(res, error) {
+          res.data ? resolve(res.data) : reject(error)
+        }
+      })
+    })
 }
 
 
@@ -41,5 +54,6 @@ function commonAjaxKy(params, ServiceId, ServiceMethod) {
 // }
 
 module.exports = {
-  commonAjaxKy: commonAjaxKy
+  commonAjaxKy: commonAjaxKy,
+  areaAjax: areaAjax
 }

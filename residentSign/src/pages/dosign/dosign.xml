@@ -1,30 +1,107 @@
 <view class="container">
-  <view class="body">
-    <view class="personInfo">
-      <view class="left-avatar">
-        <image wx:if='{{!dosignPersonInfo.avatar}}' src="../../assets/img/zbl_avatar.png" alt="头像">
-        <image v-else :src="imgReqUrl + avatar" alt="头像" style="border-radius:50%;">
-      </view>
-      <view class="right-info">
-        <text class="withline">
-          <text class="name">{{personName}}</text>
-          <text class="age">{{age}}岁</text>
-          <image :src="sex ==='1'?sexImg[0]:sexImg[1]" alt="性别" class="sex">
-        </text>
-        <text><text class="grey">证件类型</text><text>{{idType | filterIdType}}</text></text>
-        <text><text class="grey">证件号码</text><text>{{idOrNo}}</text></text>
-      </view>
-    </view>
-    <view class="divide"></view>
-    <view class="container addressPhone">
-      <mt-field label="手机号码" type="tel" :value='zbl_phoneNo' @input='editPhoneNo'></mt-field>
-      <mt-cell title="居住地址" is-link @click.native='clkHomeTown'>
-        <text v-if='zbl_address.decText' class="hideMore">{{zbl_address.decText}}</text>
-        <text v-else>请输入</text>
-      </mt-cell>
-    </view>
-    <view class="viewide"></view>
-    <!-- <view class="container">
+    <view class="body">
+        <view class="personInfo">
+            <view class="left-avatar">
+                <image wx:if='{{!dosignPersonInfo.avatar}}' src="../../assets/img/zbl_avatar.png" class='personAvatar' />
+                <image wx:else src="{{imgReqUrl + dosignPersonInfo.avatar}}" class='personAvatar' />
+            </view>
+            <view class="right-info">
+                <view class="withline">
+                    <text class="name">{{dosignPersonInfo.personName}}</text>
+                    <text class="age">{{personAge}}岁</text>
+                    <image src="{{dosignPersonInfo.sex == '1'?sexImg[0]:sexImg[1]}}" class="sex" />
+                </view>
+                <view>
+                    <text class="grey">证件类型</text>
+                    <text>{{dosignPersonInfo.idType === '01'?'居民身份证':'其他'}}</text>
+                </view>
+                <view>
+                    <text class="grey">证件号码</text>
+                    <text>{{dosignPersonInfo.idOrNo}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="divide"></view>
+        <view class='gettingInputInfo'>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号码</view>
+                </view>
+                <view class="weui-cell__bd phoneInput">
+                    <input class="weui-input" value='{{dosignPersonInfo.phoneNo}}' />
+                </view>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title">
+                <navigator url="" class="weui-cell weui-cell_access">
+                    <view class="weui-cell__bd">居住地址</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">请输入</view>
+                </navigator>
+            </view>
+
+            <view class="weui-cells weui-cells_after-title">
+                <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd">家庭医生</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">请选择</view>
+                </navigator>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                    <view class="weui-cell__bd">服务包</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">请查看</view>
+                </navigator>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <view class="weui-cell__bd">签约机构</view>
+                    <view class="weui-cell__ft">请输入</view>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                    <view class="weui-cell__bd">签约周期</view>
+                    <view class="weui-cell__ft">1年</view>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">国家/地区</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+                        <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+
+            <checkbox-group bindchange="bindAgreeChange">
+                <label class="weui-agree" for="weuiAgree">
+                    <view class="weui-agree__text">
+                        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                        <view class="weui-agree__checkbox-icon">
+                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                        </view>
+                        已阅读并同意<navigator url="" class="weui-agree__link">《签约协议》</navigator>
+                    </view>
+                </label>
+            </checkbox-group>
+
+            <view class='submitBtn'>
+                <button class="weui-btn" type="primary" plain="true" size="mini">提交申请</button>
+            </view>
+
+
+
+
+            <!-- <mt-field label="手机号码" type="tel" :value='zbl_phoneNo' @input='editPhoneNo'></mt-field>
+            <mt-cell title="居住地址" is-link @click.native='clkHomeTown'>
+                <text v-if='zbl_address.decText' class="hideMore">{{zbl_address.decText}}</text>
+                <text v-else>请输入</text>
+            </mt-cell> -->
+        </view>
+        <view class="viewide"></view>
+        <!-- <view class="container">
       <mt-cell title="家庭医生" is-link @click.native='selectDoctorTeam'>
         <span v-show='!selectDocTeam.selectTeam'>请选择</span>
         <span v-show='selectDocTeam.selectTeam' class="hideMore">{{selectDocTeam.selectTeam}}</span>
@@ -43,10 +120,10 @@
         <span style="margin-right:25px">1年</span>
       </mt-cell>
     </view> -->
-    <!-- <view class="handUp">
+        <!-- <view class="handUp">
       <p class='agreenment'><input type="checkbox" value='length' @click='checkRead' ref='checkRead'>已阅读并同意<span @click='qianyuexieyi'>《签约协议》</span></p>
       <mt-button @click.native="submit" size="small" :id="flag?'btnBlue':'btnGrey'">提交申请</mt-button>
       <p class="creditable">实名制签约，请确保所有资料真实有效</p>
     </view> -->
-  </view>
+    </view>
 </view>

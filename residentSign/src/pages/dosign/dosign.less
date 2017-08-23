@@ -1,3 +1,93 @@
-.title {
-  font-size: 40rpx;
+@fontsize: 30rpx;
+.body {
+    font-size: @fontsize;
+    .hideMore {  /*三点省略隐藏代码段*/
+        display: inline-block;
+        width: 45rpx;
+        text-align:right;
+        overflow:hidden;
+        word-break:keep-all;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+    .personInfo {
+        width: 100%;
+        line-height: 1.8;
+        display: flex;
+        flex-direction: row;
+        margin: 30rpx 0;
+        .left-avatar {
+            margin-left: 20px;
+            image {
+                width: 120rpx;
+                height: 120rpx;
+                border-radius: 50%;
+            }
+        }
+        .right-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            .withline {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border-bottom: 1px solid #adadad;
+                padding-bottom: 6px;
+                .name {
+                    color: #39B26D;
+                    margin-right: 30rpx;
+                }
+                .age {
+                    color: #333;
+                    margin-right: 40rpx;
+                }
+                .sex {
+                    width: 40rpx;
+                    height: 40rpx;
+                }
+            }
+            .grey {
+                margin-right: 25px;
+                color: #333;
+            }
+        }
+    }
+    .divide {
+        height: 10px;
+        background-color: #F2F2F2;
+    }
+    .gettingInputInfo {
+        .phoneInput input {
+            text-align: right;
+        }
+    }
+
+
+    .addressPhone {
+        margin: 13px 0 13px 13px;
+        width: 100%;
+        line-height: 1.8;
+        .left {
+            display: inline-block;
+            margin-right: 30rpx;
+            width: 20%;
+            color: #333;
+            float: left;
+        }
+        .right {
+            display: inline-block;
+            width: 60%;
+            float: left;
+        }
+        & p {
+            margin-bottom: 5px;
+        }
+    }
+    .submitBtn {
+        width: 80%;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
 }

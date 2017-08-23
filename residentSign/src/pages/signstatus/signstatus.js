@@ -24,7 +24,9 @@ Page({
           this.setData({
             queryFamilyArr: res.body
           })
-          let that = this, tempArr24 = [], tempArr1 = []
+          let that = this
+          let tempArr24 = []
+          let tempArr1 = []
           this.data.queryFamilyArr.forEach(item => {
             if (item.status === '1' || item.status === '2') { //2为签约完成，1为待签约
               tempArr24.push(item)
