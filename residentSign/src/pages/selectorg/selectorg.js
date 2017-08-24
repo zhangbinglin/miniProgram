@@ -4,12 +4,81 @@ let util = require('../../utils/util.js')
 // 创建页面实例对象
 Page({
   data: {
-    orgTeam: []
+    name: '',
+    teamId: '',
+    teamName: '',
+    orgTeam: [],
+    orgName: '',
+    teamCounts: '',
+    docteams: [],
+    selectorgShow: true,
+    homedocteamShow: false,
+    docteamdetailShow: false,
+    doctorDetailInfoObj: {}
   },
+  // getCurrentPages(e) {
+  //   console.log(e);
+  // },
   selectedOrganization(e) {
-    wx.navigateTo({
-      url: '../homedocteam/homedocteam?orgId=' + e.currentTarget.dataset.orgid + '&orgName=' + e.currentTarget.dataset.orgname
-    })
+      let params = [e.currentTarget.dataset.orgid]
+      util.commonAjax(params, 'pcn.teamService', 'getOrgVOByOrgId').then(res => {
+        if (res.code === 200) {
+          this.setData({
+            orgName: e.currentTarget.dataset.orgname,
+            teamCounts: res.body.teamCounts,
+            docteams: res.body.teams,
+            selectorgShow: false,
+            homedocteamShow: true,
+            docteamdetailShow: false
+          })
+        }
+      })
+  },
+  selectedHomeDocteam(e) {
+      let teamInfo = e.currentTarget.dataset.teaminfo
+      let params = ["hcn.shenzhen",teamInfo.teamId,teamInfo.teamLeaderId]
+      util.commonAjax(params, 'pcn.residentSignService', 'getDoctorDetail').then(res => {
+        if (res.code === 200) {
+          let docTypeDic = ['','全科医生','全科护士','公卫医生','公卫护士','计生医生','中医师','','','其他']
+          let obj = {
+              avatarFileId: res.body.docInfo.avatarFileId,
+              name: res.body.docInfo.name,
+              docType: docTypeDic[parseInt(res.body.docInfo.docType)],
+              orgName: teamInfo.orgName,
+              teamName: teamInfo.teamName,
+              teamId: teamInfo.teamId,
+              signNum: res.body.signNum,
+              phoneNo: res.body.docInfo.phoneNo,
+              docNum: res.body.docNum,
+              packNum: res.body.packNum,
+              imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/'
+          }
+          this.setData({
+              name: res.body.docInfo.name,
+              teamId: teamInfo.teamId,
+              teamName: teamInfo.teamName,
+              doctorDetailInfoObj: obj,
+              selectorgShow: false,
+              homedocteamShow: false,
+              docteamdetailShow: true
+          })
+        }
+      })
+  },
+  selectedTeamId(e) {
+      let conveyTeamInfo = {
+          teamId: this.data.teamId,
+          doctorNameAndteamName: this.data.name + ' ' + this.data.teamName,
+          orgName: this.data.orgName
+      }
+      console.log(conveyTeamInfo)
+
+      wx.navigateBack({
+        //   delta: 2
+      })
+    //   wx.navigateTo({
+    //     url: '../dosign/dosign?conveyTeamInfo=' + JSON.stringify(conveyTeamInfo)
+    //   })
   },
   onLoad() {
     let params = [{

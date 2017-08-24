@@ -1,4 +1,154 @@
-<!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
-<view class="container">
-  <text class="title">{{ title }}</text>
+<template name="docteamdetail">
+<view class="docteamdetail">
+    <view class="personInfo">
+        <view class="left-avatar">
+            <image src='{{imgReqUrl + avatarFileId}}' wx:if='{{avatarFileId}}' />
+            <image src="../../assets/img/zbl_avatar.png" wx:else />
+            <!-- <mt-badge size="small" color="#888">团队长</mt-badge> -->
+        </view>
+        <view class="right-info">
+            <text class="name">{{name}}</text>
+            <text class="zhicheng">{{docType}}</text>
+            <view class="orgName">
+                <text class="jigou">{{orgName}}</text>
+                <view class="signnum">
+                    已签约 <text class="numColor">{{signNum}}</text>
+                </view>
+            </view>
+            <!-- <image src="../../assets/img/zbl_erweima.png" alt="二维码" @click='showPic = true'> -->
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_team.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">所属团队</view>
+            <view class="weui-cell__ft">{{teamName}}</view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_severphone.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">服务电话</view>
+            <view class="weui-cell__ft">{{phoneNo}}</view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_doctorInd.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">医生简介</view>
+            <view class="weui-cell__ft"></view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_certificate.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">资质证书</view>
+            <view class="weui-cell__ft"></view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_teamPuc.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">服务团队({{docNum}})</view>
+            <view class="weui-cell__ft"></view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <image src="../../assets/img/zbl_package.png" style="margin-right: 5px;vertical-align: middle;width:20px; height:20px;"></image>
+            </view>
+            <view class="weui-cell__bd">服务包({{packNum}})</view>
+            <view class="weui-cell__ft"></view>
+        </view>
+    </view>
+    <view class="divide"></view>
+
+    <view class='selectBtn' bindtap='selectedTeamId'>
+        <button class="weui-btn" size="mini">选择</button>
+    </view>
+
+    <!-- <view class="doctorIndoc">
+            <mt-cell title="医生简介">
+                <text class='icon-up' @click='showOrHide'></text>
+                <image slot="icon" src="../../assets/img/zbl_doctorInd.png" width="28" height="28">
+            </mt-cell>
+            <view class="content" style="display:block">
+                <text v-show='docIndoc'>{{docIndoc}}</text>
+                <text v-show='!docIndoc'>暂无</text>
+            </view>
+        </view>
+        <view class="divide"></view> -->
+
+    <!-- <view class="certificate">
+            <mt-cell title="资质证书">
+                <text class="icon-down" @click='showOrHide'></text>
+                <image slot="icon" src="../../assets/img/zbl_certificate.png" width="28" height="28">
+            </mt-cell>
+            <view class="content">
+                <image :src='imgReqUrl + certificateHead' width="100" height="90" v-if='certificateHead'>
+                <image :src='imgReqUrl + certificateBack' width="100" height="90" v-if='certificateBack'>
+                <text v-else>暂无</text>
+            </view>
+        </view>
+        <view class="divide"></view> -->
+
+    <!-- <view class="serverTeam">
+            <mt-cell :title='nPeople'>
+                <text class="icon-down" @click='requestServerTeam'></text>
+                <image slot="icon" src="../../assets/img/zbl_teamPuc.png" width="28" height="28">
+            </mt-cell>
+            <view class="content">
+                <view class="couple cbafter" v-for='item in serverTeam'>
+                    <view class="left-avatar fl">
+                        <image :src="imgReqUrl + item.avatarFileId" v-show='item.avatarFileId' alt="头像" style="width:1.5rem;height:1.5rem;border-radius:1.5rem;">
+                        <image src="../../assets/img/zbl_avatar.png" v-show='!item.avatarFileId' style="width:1.5rem;height:1.5rem;border-radius:1.5rem;">
+                    </view>
+                    <view class="right-info fl">
+                        <text>
+                            <text class="teamerName">{{item.name}}</text>
+                            <text>{{item.docType | filterDocType}}</text><br>
+                            <text v-show='!item.introduce'>无</text>
+                            <text v-show='item.introduce'>{{item.introduce}}</text>
+                        </text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="divide"></view> -->
+
+    <!-- <view class="packages">
+            <mt-cell :title="nPackage">
+                <text class="icon-down" @click='requestServerPackage'></text>
+                <image slot="icon" src="../../assets/img/zbl_package.png" width="28" height="28">
+            </mt-cell>
+            <view class="content">
+                <mt-cell v-for='item in packages' :title="item.spPackName" @click.native='packageDetail' :id='item.spPackId'></mt-cell>
+            </view>
+        </view>
+        <view class="divide"></view> -->
+
 </view>
+</template>

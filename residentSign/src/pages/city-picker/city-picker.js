@@ -31,7 +31,7 @@ Page({
       let compeleteAddress = this.data.province + this.data.city + this.data.county + this.data.selectedStreetText + this.data.areaTextDetail
       // wx.setStorageSync('compeleteAddress',tempStr)
       let regionCode = this.data.regionCode
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../dosign/dosign?compeleteAddress=' + compeleteAddress + '&regionCode=' + regionCode
       })
     } else {

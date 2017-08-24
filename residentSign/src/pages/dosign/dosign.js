@@ -1,37 +1,41 @@
 // 获取全局应用程序实例对象
 // const app = getApp()
 
-// 创建页面实例对象
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     dosignPersonInfo: {},
     imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/',
     sexImg: ['../../assets/img/zbl_male.png', '../../assets/img/zbl_female.png'],
     personAge: '',
-    address: '',
     regionCode: '',
-    addressValue: '请输入'
+    addressValue: '请输入',
+    doctorNameAndteamName: '请选择',
+    orgName: '请输入',
+    teamId: ''
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad (options) {
     if(wx.getStorageSync('dosignPersonInfo')) {
       this.setData({
         dosignPersonInfo: JSON.parse(wx.getStorageSync('dosignPersonInfo')),
       })
       this.setData({
-        personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0],
-        address: options.compeleteAddress,
-        regionCode: options.regionCode
+        personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0]
       })
-      this.setData({
-        addressValue: this.data.address
-      })
+    }
+    if(options.regionCode) {
+        this.setData({
+          addressValue: options.compeleteAddress,
+          regionCode: options.regionCode
+        })
+    }
+    if(options.conveyTeamInfo) {
+        let optionsObj = JSON.parse(options.conveyTeamInfo)
+        this.setData({
+          doctorNameAndteamName: optionsObj.doctorNameAndteamName,
+          orgName: optionsObj.orgName,
+          teamId: optionsObj.teamId
+        })
     }
   },
 

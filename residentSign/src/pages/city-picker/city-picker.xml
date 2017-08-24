@@ -1,4 +1,3 @@
-<!--index.wxml-->
 <view class="container">
     <view class="input">
         <input placeholder="选择省市区" value="{{province}} {{city}} {{county}}" focus="{{focus}}" bindfocus="open" />

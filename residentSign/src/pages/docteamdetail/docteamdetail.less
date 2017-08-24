@@ -1,3 +1,57 @@
-.title {
-  font-size: 40rpx;
+@mainColor: #35B46F;
+@greyFont: #ADADAD;
+@fontSize: 34rpx;
+.docteamdetail {
+    .personInfo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 15px 10px 10px 15px;
+        font-size: @fontSize;
+        color: @greyFont;
+        background-color: #fff;
+        .left-avatar {
+            margin-right: 15px;
+            image {
+                width: 140rpx;
+                height: 140rpx;
+                border-radius: 50%;
+            }
+        }
+        .right-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+            .name {
+                color: #39B26D;
+                font-size: 40rpx;
+            }
+            .orgName {
+                display: flex;
+                flex-direction: row;
+                .signnum {
+                    margin-left: 50px;
+                }
+                .numColor {
+                    color: #FB9D38;
+                }
+            }
+        }
+    }
+    .selectBtn {
+      margin: 30px;
+      text-align: center;
+      .weui-btn {
+        width: 85%;
+        height: 80rpx;
+        line-height: 80rpx;
+        font-size: 40rpx;
+        color: #fff;
+        background-color: #35B46F;
+      }
+    }
+    .divide {
+        height: 10px;
+        background-color: #F2F2F2;
+    }
 }

@@ -1,18 +1,18 @@
 {
-  "pages":[
-    "pages/selectorg/selectorg",
-    "pages/homedocteam/homedocteam",
-    "pages/docteamdetail/docteamdetail",
-    "pages/signstatus/signstatus",
-    "pages/dosign/dosign",
-    "pages/city-picker/city-picker",
-    "pages/signinginfo/signinginfo"
-  ],
-  "window":{
-    "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "welcome",
-    "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": false
-  }
+    "pages": [
+        "pages/signstatus/signstatus",
+        "pages/selectorg/selectorg",
+        "pages/dosign/dosign",
+        "pages/city-picker/city-picker",
+        "pages/homedocteam/homedocteam",
+        "pages/docteamdetail/docteamdetail",
+        "pages/signinginfo/signinginfo"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "welcome",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false
+    }
 }
