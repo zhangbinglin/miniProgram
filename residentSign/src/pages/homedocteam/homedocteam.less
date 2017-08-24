@@ -1,0 +1,75 @@
+@mainColor: #35B46F;
+@greyFont: #ADADAD;
+@fontSize: 30rpx;
+page {
+  background-color: #f2f2f2;
+  height: 100vh;
+}
+.orgInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  .teamName {
+      font-size: @fontSize;
+      color: @mainColor;
+  }
+  .detail {
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    image {
+        width: 16px;
+        height: 16px;
+        margin-right: 20rpx;
+    }
+    text {
+        color: @greyFont;
+        margin-right: 20rpx;
+    }
+  }
+}
+.divide {
+    height: 10px;
+    background-color: #F2F2F2;
+}
+.cicleBody {
+  .title {
+      font-size: 30rpx;
+      background-color: #fff;
+      padding: 20rpx;
+      padding-left: 0;
+      color: @greyFont;
+  }
+  .title:before {
+      content: '';
+      height: 10rpx;
+      border-left: 10rpx solid @mainColor;
+      margin-right: 20rpx;
+  }
+    .item {
+      position: relative;
+        padding: 30rpx;
+        border-top: 1px solid #ddd;
+        background-color: #fff;
+        .teamName {
+            font-size: @fontSize;
+            color: @mainColor;
+        }
+        .detail {
+            font-size: 30rpx;
+            margin-top: 20rpx;
+        }
+        .rightIcon {
+          width:10px;
+          height:18px;
+          position:absolute;
+          top:50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          right:15px;
+        }
+    }
+}

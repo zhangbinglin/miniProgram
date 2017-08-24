@@ -10,20 +10,29 @@ Page({
     dosignPersonInfo: {},
     imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/',
     sexImg: ['../../assets/img/zbl_male.png', '../../assets/img/zbl_female.png'],
-    personAge: ''
+    personAge: '',
+    address: '',
+    regionCode: '',
+    addressValue: '请输入'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    this.setData({
-      dosignPersonInfo: JSON.parse(wx.getStorageSync('dosignPersonInfo'))
-    })
-    this.setData({
-        personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0]
-    })
-    console.log(this.data.dosignPersonInfo)
+    if(wx.getStorageSync('dosignPersonInfo')) {
+      this.setData({
+        dosignPersonInfo: JSON.parse(wx.getStorageSync('dosignPersonInfo')),
+      })
+      this.setData({
+        personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0],
+        address: options.compeleteAddress,
+        regionCode: options.regionCode
+      })
+      this.setData({
+        addressValue: this.data.address
+      })
+    }
   },
 
   /**

@@ -1,0 +1,33 @@
+@mainColor: #35B46F;
+@greyFont: #ADADAD;
+@fontSize: 30rpx;
+page {
+  background-color: #f2f2f2;
+  height: 100vh;
+}
+.circleBody {
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  .teamName {
+      font-size: @fontSize;
+      color: @mainColor;
+  }
+  .detail {
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    image {
+        width: 16px;
+        height: 16px;
+        margin-right: 20rpx;
+    }
+    text {
+        color: @greyFont;
+        margin-right: 20rpx;
+    }
+  }
+}

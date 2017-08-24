@@ -1,9 +1,29 @@
 let base = 'http://122.224.131.235:9090'
 
+function commonAjax(params, ServiceId, ServiceMethod) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${base}/pcn-core/*.jsonRequest`,
+      method: 'POST',
+      data: params,
+      header: {
+        "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
+        "X-Service-Id": ServiceId,
+        "X-Service-Method": ServiceMethod,
+        "Content-Type": "application/json"
+      },
+      success: function(res, error) {
+        res.data ? resolve(res.data) : reject(error)
+      }
+    })
+  })
+}
+
 function commonAjaxKy(params, ServiceId, ServiceMethod) {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${base}/pcn-core/dataProxyController/hcnJsonRequestProxy?short_url=*.jsonRequest&params=${params}`,
+      method: 'POST',
       data: {},
       header: {
         "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
@@ -54,6 +74,7 @@ function areaAjax(params) {
 // }
 
 module.exports = {
+  commonAjax: commonAjax,
   commonAjaxKy: commonAjaxKy,
   areaAjax: areaAjax
 }

@@ -33,9 +33,9 @@
             </view>
 
             <view class="weui-cells weui-cells_after-title">
-                <navigator url="" class="weui-cell weui-cell_access">
+                <navigator url="../city-picker/city-picker" class="weui-cell weui-cell_access">
                     <view class="weui-cell__bd">居住地址</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access">请输入</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access">{{addressValue}}</view>
                 </navigator>
             </view>
 

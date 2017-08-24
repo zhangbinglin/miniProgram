@@ -6,7 +6,7 @@ let util = require("../../utils/util.js")
 Page({
   data: {
     provinces: [],
-    province: "选择省市区",
+    province: "",
     citys: [],
     city: "",
     countys: [],
@@ -16,16 +16,37 @@ Page({
     condition: false,
     areaAjaxResultArr: [],
     areaAjaxResultShow: false,
-    selectedStreetText: ''
+    selectedStreetText: '',
+    countyCode: '440303',
+    regionCode: '',
+    areaTextDetail: ''
+  },
+  onInputTextarea(e) {
+    this.setData({
+      areaTextDetail: e.detail.value
+    })
+  },
+  saveAddress(e) {
+    if(this.data.selectedStreetText && this.data.areaTextDetail) {
+      let compeleteAddress = this.data.province + this.data.city + this.data.county + this.data.selectedStreetText + this.data.areaTextDetail
+      // wx.setStorageSync('compeleteAddress',tempStr)
+      let regionCode = this.data.regionCode
+      wx.navigateTo({
+        url: '../dosign/dosign?compeleteAddress=' + compeleteAddress + '&regionCode=' + regionCode
+      })
+    } else {
+      this.openAlert()
+    }
   },
   openActionsheet: function() {
-      let params = `parentKey=${440303000000}&sliceType=4`
+    if(this.data.county) {
+      let params = `parentKey=${this.data.countyCode + "000000"}&sliceType=4`
       let tempArr = []
       util.areaAjax(params).then(res => {
           res.items.forEach(item => {
               let obj = {
                   regionText: item.text,
-                  regionCode: item.properties.regionCode
+                  regionCode: item.key
               }
               tempArr.push(obj)
           })
@@ -37,22 +58,34 @@ Page({
             areaAjaxResultShow: true
         })
     })
+    } else {
+      this.openAlert()
+    }
   },
   selectedStreet(e) {
       this.setData({
           areaAjaxResultShow: false,
-          selectedStreetText: e.currentTarget.dataset.region.regionText
+          selectedStreetText: e.currentTarget.dataset.region.regionText,
+          regionCode: e.currentTarget.dataset.region.regionCode
       })
-      console.log(e.currentTarget.dataset.region.regionCode);
+  },
+  openAlert: function () {
+      wx.showModal({
+          content: '请先输入完整地址',
+          showCancel: false,
+          success: function (res) {
+              if (res.confirm) {
+                  // console.log('用户点击确定')
+              }
+          }
+      })
   },
   bindChange: function(e) {
-    //console.log(e);
     var val = e.detail.value
     var t = this.data.values;
     var cityData = this.data.cityData;
 
     if(val[0] !== t[0]){
-      console.log('province no ');
       const citys = [];
       const countys = [];
 
@@ -70,15 +103,14 @@ Page({
         county: cityData[val[0]].sub[0].sub[0].name,
         countys:countys,
         values: val,
-        value:[val[0],0,0]
+        value:[val[0],0,0],
+        countyCode: cityData[val[0]].sub[0].sub[0].code
       })
-
+      // console.log(this.data.countyCode);
       return;
     }
     if(val[1] !== t[1]){
-      console.log('city no');
       const countys = [];
-
       for (let i = 0 ; i < cityData[val[0]].sub[val[1]].sub.length; i++) {
         countys.push(cityData[val[0]].sub[val[1]].sub[i].name)
       }
@@ -88,20 +120,21 @@ Page({
         county: cityData[val[0]].sub[val[1]].sub[0].name,
         countys:countys,
         values: val,
-        value:[val[0],val[1],0]
+        value:[val[0],val[1],0],
+        countyCode: cityData[val[0]].sub[val[1]].sub[0].code
       })
+      // console.log(this.data.countyCode);
       return;
     }
     if(val[2] !== t[2]){
-      console.log('county no');
       this.setData({
         county: this.data.countys[val[2]],
-        values: val
+        values: val,
+        countyCode: cityData[val[0]].sub[val[1]].sub[val[2]].code
       })
+      // console.log(this.data.countyCode);
       return;
     }
-
-
   },
   open:function(){
     this.setData({
@@ -120,11 +153,11 @@ Page({
     for(let i=0;i<cityData.length;i++){
       provinces.push(cityData[i].name);
     }
-    console.log('省份完成');
+    // console.log('省份完成');
     for (let i = 0 ; i < cityData[0].sub.length; i++) {
       citys.push(cityData[0].sub[i].name)
     }
-    console.log('city完成');
+    // console.log('city完成');
     for (let i = 0 ; i < cityData[0].sub[0].sub.length; i++) {
       countys.push(cityData[0].sub[0].sub[i].name)
     }
@@ -134,10 +167,10 @@ Page({
       'citys':citys,
       'countys':countys,
       'province':cityData[0].name,
-      'city':cityData[0].sub[0].name,
-      'county':cityData[0].sub[0].sub[0].name
+      'city':cityData[0].sub[2].name,
+      'county':cityData[0].sub[2].sub[1].name
     })
-    console.log('初始化完成');
+    console.log('初始化完成')
 
   }
 })

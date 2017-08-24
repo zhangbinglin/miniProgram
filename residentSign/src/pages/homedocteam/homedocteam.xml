@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="orgInfo">
+    <text class="teamName">{{orgName}}</text>
+    <view class="detail">
+      <image src="../../assets/img/zbl_docteam.png" />
+      <text>团队数 {{teamCounts}}</text>
+    </view>
+  </view>
+  <view class="divide"></view>
+
+  <view class='cicleBody'>
+    <view class="title">选择家医团队</view>
+    <view class="item" wx:for='{{docteams}}' bindtap='selectedHomeDocteam' data-teaminfo='{{item}}'>
+      <text class="teamName">{{item.teamName}}</text>
+      <view class="detail">
+        <text>团队长: {{item.teamLeaderName}}</text>
+      </view>
+      <image src='../../assets/img/zy_right.png' class='rightIcon' />
+    </view>
+  </view>
+</view>

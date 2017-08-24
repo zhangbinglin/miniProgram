@@ -1,9 +1,11 @@
 {
   "pages":[
-    "pages/city-picker/city-picker",
-    "pages/address-tpl/address-tpl",
+    "pages/selectorg/selectorg",
+    "pages/homedocteam/homedocteam",
+    "pages/docteamdetail/docteamdetail",
     "pages/signstatus/signstatus",
     "pages/dosign/dosign",
+    "pages/city-picker/city-picker",
     "pages/signinginfo/signinginfo"
   ],
   "window":{

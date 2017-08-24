@@ -1,16 +1,20 @@
 <!--index.wxml-->
 <view class="container">
     <view class="input">
-        <input placeholder="选择" value="{{province}} {{city}} {{county}}" focus="{{focus}}" bindfocus="open" />
+        <input placeholder="选择省市区" value="{{province}} {{city}} {{county}}" focus="{{focus}}" bindfocus="open" />
         <input placeholder="选择街道" value="{{selectedStreetText}}" bindtap="openActionsheet" />
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入详细地址" style="height: 3.5em" />
+                    <textarea bindinput="onInputTextarea" placeholder="请输入详细地址" style='height:5em' />
                 </view>
             </view>
         </view>
+        <view class='saveBtn' bindtap='saveAddress'>
+            <button class="weui-btn" type="primary" plain="true" size="mini">保存</button>
+        </view>
     </view>
+
     <view class='areaAjaxResult' wx:if='{{areaAjaxResultShow}}'>
         <block wx:for='{{areaAjaxResultArr}}'>
             <view class='item' bindtap='selectedStreet' data-region='{{item}}'>{{item.regionText}}</view>
