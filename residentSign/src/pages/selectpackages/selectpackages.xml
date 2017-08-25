@@ -1,15 +1,21 @@
-<!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <view class="container">
-  <view class='packages'>
-    <block wx:for='{{}}'>
-      <view class="icon checked"></view>
-      <view class="introduction">
-          <text class="title">{{item.spPackName}}</text>
-          <text class="forWho">适合人群编号: {{item.suitableObject}}</text>
-      </view>
-      <view class='submitBtn'>
-          <button class="weui-btn" type="primary" plain="true" size="mini">提交申请</button>
-      </view>
-    </block>
-  </view>
+    <view class='packages'>
+        <view class='item' wx:for='{{packagesArr}}'>
+            <checkbox-group bindchange="checkboxChange" data-spid='{{item.spPackId}}' data-packageinfo='{{item}}'>
+                <label class="checkbox">
+                    <checkbox value="{{item.spPackName}}" />
+                </label>
+            </checkbox-group>
+            <view class="introduction">
+                <text class="title">{{item.spPackName}}</text>
+                <text class="forWho hideMore">适合人群编号: {{item.suitableObject}}</text>
+            </view>
+            <view class='detailBtn'>
+                <button class="weui-btn" size="mini">详情</button>
+            </view>
+        </view>
+    </view>
+    <view class='selectBtn' bindtap='selectedPackages'>
+        <button class="weui-btn" size="mini">确定</button>
+    </view>
 </view>

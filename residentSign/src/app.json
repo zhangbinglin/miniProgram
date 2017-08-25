@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/signstatus/signstatus",
         "pages/selectpackages/selectpackages",
+        "pages/signstatus/signstatus",
+
         "pages/selectdoctorteam/selectdoctorteam",
         "pages/dosign/dosign",
         "pages/city-picker/city-picker",

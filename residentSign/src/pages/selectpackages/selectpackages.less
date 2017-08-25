@@ -1,36 +1,54 @@
-
-.icon {
-    display: inline-block;
-    background-color: #fff;
-    border-radius: 100%;
-    border: 1px solid #ccc;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-right: 10px;
+.packages {
+    .item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-bottom: 1px solid #999;
+        padding: 10px 0;
+        .checkbox {
+            margin-left: 15px;
+        }
+        .introduction {
+            margin-left: 10px;
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            // justify-content: flex-start;
+            line-height: 1.8;
+            .title {
+                color: #35b46f;
+            }
+            .forWho {
+                font-size: 26rpx;
+                color: #333;
+            }
+        }
+        .detailBtn {
+            margin-left: 15px;
+            .weui-btn {
+                padding: 0 24rpx;
+                color: #fff;
+                background-color: #f1c50e;
+            }
+        }
+        .hideMore {  /*三点省略隐藏代码段*/
+            width: 100%;
+            overflow:hidden;
+            word-break:keep-all;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+        }
+    }
 }
-.icon.checked {
-  background-color: #67cc70;
-  border-color: #67cc70;
-}
-.icon:after {
-  border: 2px solid transparent;
-  border-left: 0;
-  border-top: 0;
-  content: " ";
-  top: 3px;
-  left: 6px;
-  position: absolute;
-  width: 4px;
-  height: 8px;
-  -webkit-transform: rotate(45deg) scale(0);
-  transform: rotate(45deg) scale(0);
-  -webkit-transition: -webkit-transform .2s;
-  transition: -webkit-transform .2s;
-  transition: transform .2s;
-  transition: transform .2s,-webkit-transform .2s;
-  border-color: #fff;
-  -webkit-transform: rotate(45deg) scale(1);
-  transform: rotate(45deg) scale(1);
+.selectBtn {
+  margin: 30px;
+  text-align: center;
+  .weui-btn {
+    width: 85%;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 40rpx;
+    color: #fff;
+    background-color: #35B46F;
+  }
 }

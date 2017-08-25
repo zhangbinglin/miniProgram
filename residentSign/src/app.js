@@ -26,6 +26,7 @@ App({
   globalData: {
     userInfo: null,
     userAddressInfo: {},
-    doctorTeamInfo: {}
+    doctorTeamInfo: {},
+    selectedPackagesInfo: {}
   }
 })
