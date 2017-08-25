@@ -1,0 +1,15 @@
+<!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
+<view class="container">
+  <view class='packages'>
+    <block wx:for='{{}}'>
+      <view class="icon checked"></view>
+      <view class="introduction">
+          <text class="title">{{item.spPackName}}</text>
+          <text class="forWho">适合人群编号: {{item.suitableObject}}</text>
+      </view>
+      <view class='submitBtn'>
+          <button class="weui-btn" type="primary" plain="true" size="mini">提交申请</button>
+      </view>
+    </block>
+  </view>
+</view>

@@ -4,8 +4,8 @@ let util = require('../../utils/util.js')
 Page({
   data: {
     queryFamilyArr: [],
-    queryFamilyArrStatus1: [],
-    queryFamilyArrStatus24: [],
+    queryFamilyArrStatus4: [],
+    queryFamilyArrStatus12: [],
     imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/'
   },
   waitForSign(e) {
@@ -25,20 +25,20 @@ Page({
             queryFamilyArr: res.body
           })
           let that = this
-          let tempArr24 = []
-          let tempArr1 = []
+          let tempArr12 = []
+          let tempArr4 = []
           this.data.queryFamilyArr.forEach(item => {
             if (item.status === '1' || item.status === '2') { //2为签约完成，1为待签约
-              tempArr24.push(item)
+              tempArr12.push(item)
             } else {
-              tempArr1.push(item)
+              tempArr4.push(item)
             }
           })
           that.setData({
-            queryFamilyArrStatus24: tempArr24
+            queryFamilyArrStatus12: tempArr12
           })
           that.setData({
-            queryFamilyArrStatus1: tempArr1
+            queryFamilyArrStatus4: tempArr4
           })
         }
       })

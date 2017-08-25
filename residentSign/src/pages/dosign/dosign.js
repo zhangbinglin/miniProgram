@@ -12,6 +12,11 @@ Page({
     orgName: '请输入',
     teamId: ''
   },
+  gotoSelectPackages(e) {
+    wx.navigateTo({
+      url: '../selectpackages/selectpackages?teamId=' + e.currentTarget.dataset.teamid
+    })
+  },
 
   onLoad(options) {
     if (wx.getStorageSync('dosignPersonInfo')) {

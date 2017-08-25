@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/signstatus/signstatus",
+        "pages/selectpackages/selectpackages",
         "pages/selectdoctorteam/selectdoctorteam",
         "pages/dosign/dosign",
         "pages/city-picker/city-picker",

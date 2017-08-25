@@ -1,0 +1,36 @@
+
+.icon {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.icon.checked {
+  background-color: #67cc70;
+  border-color: #67cc70;
+}
+.icon:after {
+  border: 2px solid transparent;
+  border-left: 0;
+  border-top: 0;
+  content: " ";
+  top: 3px;
+  left: 6px;
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  -webkit-transform: rotate(45deg) scale(0);
+  transform: rotate(45deg) scale(0);
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s,-webkit-transform .2s;
+  border-color: #fff;
+  -webkit-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+}
