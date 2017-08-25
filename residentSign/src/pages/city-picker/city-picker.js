@@ -2,7 +2,7 @@
 //获取应用实例
 let tcity = require("../../utils/citys.js")
 let util = require("../../utils/util.js")
-// var app = getApp()
+var app = getApp()
 Page({
   data: {
     provinces: [],
@@ -29,11 +29,15 @@ Page({
   saveAddress(e) {
     if(this.data.selectedStreetText && this.data.areaTextDetail) {
       let compeleteAddress = this.data.province + this.data.city + this.data.county + this.data.selectedStreetText + this.data.areaTextDetail
-      // wx.setStorageSync('compeleteAddress',tempStr)
       let regionCode = this.data.regionCode
-      wx.redirectTo({
-        url: '../dosign/dosign?compeleteAddress=' + compeleteAddress + '&regionCode=' + regionCode
-      })
+      app.globalData.userAddressInfo = {
+        compeleteAddress: compeleteAddress,
+        regionCode: regionCode
+      }
+      wx.navigateBack({})
+      // wx.redirectTo({
+      //   url: '../dosign/dosign?compeleteAddress=' + compeleteAddress + '&regionCode=' + regionCode
+      // })
     } else {
       this.openAlert()
     }

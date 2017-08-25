@@ -1,0 +1,36 @@
+<import src="../docteamdetail/docteamdetail.wxml" />
+<view class="container">
+    <view class='selectorg' wx:if='{{selectorgShow}}'>
+        <view class="circleBody" wx:for='{{orgTeam}}'>
+            <text class="teamName" bindtap='selectedOrganization' data-orgid='{{item.orgId}}' data-orgname='{{item.orgName}}'>{{item.orgName}}</text>
+            <view class="detail">
+                <image src="../../assets/img/zbl_docteam.png" />
+                <text>团队数 {{item.teamCounts}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="homedocteam" wx:if='{{homedocteamShow}}'>
+      <view class="orgInfo">
+        <text class="teamName">{{orgName}}</text>
+        <view class="detail">
+          <image src="../../assets/img/zbl_docteam.png" />
+          <text>团队数 {{teamCounts}}</text>
+        </view>
+      </view>
+      <view class="divide"></view>
+      <view class='cicleBody'>
+        <view class="title">选择家医团队</view>
+        <view class="item" wx:for='{{docteams}}' wx:for-item='item2' bindtap='selectedHomeDocteam' data-teaminfo='{{item2}}'>
+          <text class="teamName">{{item2.teamName}}</text>
+          <view class="detail">
+            <text>团队长: {{item2.teamLeaderName}}</text>
+          </view>
+          <image src='../../assets/img/zy_right.png' class='rightIcon' />
+        </view>
+      </view>
+    </view>
+
+    <template is="docteamdetail" wx:if='{{docteamdetailShow}}' data='{{...doctorDetailInfoObj}}' />
+
+</view>

@@ -1,6 +1,5 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
 Page({
   data: {
     dosignPersonInfo: {},
@@ -14,8 +13,8 @@ Page({
     teamId: ''
   },
 
-  onLoad (options) {
-    if(wx.getStorageSync('dosignPersonInfo')) {
+  onLoad(options) {
+    if (wx.getStorageSync('dosignPersonInfo')) {
       this.setData({
         dosignPersonInfo: JSON.parse(wx.getStorageSync('dosignPersonInfo')),
       })
@@ -23,54 +22,49 @@ Page({
         personAge: new Date().getFullYear() - this.data.dosignPersonInfo.dob.split('-')[0]
       })
     }
-    if(options.regionCode) {
-        this.setData({
-          addressValue: options.compeleteAddress,
-          regionCode: options.regionCode
-        })
-    }
-    if(options.conveyTeamInfo) {
-        let optionsObj = JSON.parse(options.conveyTeamInfo)
-        this.setData({
-          doctorNameAndteamName: optionsObj.doctorNameAndteamName,
-          orgName: optionsObj.orgName,
-          teamId: optionsObj.teamId
-        })
-    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady () {
+  onReady() {
     // TODO: onReady
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow () {
-    // TODO: onShow
+  onShow() {
+    if (app.globalData.userAddressInfo.regionCode) {
+      this.setData({
+        addressValue: app.globalData.userAddressInfo.compeleteAddress,
+        regionCode: app.globalData.userAddressInfo.regionCode
+      })
+    }
+    if(app.globalData.doctorTeamInfo.teamId) {
+      this.setData({
+        teamId: app.globalData.doctorTeamInfo.teamId,
+        doctorNameAndteamName: app.globalData.doctorTeamInfo.doctorNameAndteamName,
+        orgName: app.globalData.doctorTeamInfo.orgName
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide () {
+  onHide() {
     // TODO: onHide
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload () {
+  onUnload() {
     // TODO: onUnload
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     // TODO: onPullDownRefresh
   }
 })

@@ -1,5 +1,5 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
+const app = getApp()
 let util = require('../../utils/util.js')
 // 创建页面实例对象
 Page({
@@ -66,19 +66,14 @@ Page({
       })
   },
   selectedTeamId(e) {
-      let conveyTeamInfo = {
-          teamId: this.data.teamId,
-          doctorNameAndteamName: this.data.name + ' ' + this.data.teamName,
-          orgName: this.data.orgName
+      app.globalData.doctorTeamInfo = {
+        teamId: this.data.teamId,
+        doctorNameAndteamName: this.data.name + ' ' + this.data.teamName,
+        orgName: this.data.orgName
       }
-      console.log(conveyTeamInfo)
-
       wx.navigateBack({
         //   delta: 2
       })
-    //   wx.navigateTo({
-    //     url: '../dosign/dosign?conveyTeamInfo=' + JSON.stringify(conveyTeamInfo)
-    //   })
   },
   onLoad() {
     let params = [{

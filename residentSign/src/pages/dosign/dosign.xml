@@ -33,14 +33,14 @@
             </view>
 
             <view class="weui-cells weui-cells_after-title">
-                <navigator url="../city-picker/city-picker" open-type='redirectTo' class="weui-cell weui-cell_access">
+                <navigator url="../city-picker/city-picker" open-type='navigateTo' class="weui-cell weui-cell_access">
                     <view class="weui-cell__bd">居住地址</view>
                     <view class="weui-cell__ft weui-cell__ft_in-access">{{addressValue}}</view>
                 </navigator>
             </view>
 
             <view class="weui-cells weui-cells_after-title">
-                <navigator url="../selectorg/selectorg" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <navigator url="../selectdoctorteam/selectdoctorteam" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                     <view class="weui-cell__bd">家庭医生</view>
                     <view class="weui-cell__ft weui-cell__ft_in-access">{{doctorNameAndteamName}}</view>
                 </navigator>
