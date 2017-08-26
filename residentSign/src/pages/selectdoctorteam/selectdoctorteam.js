@@ -10,6 +10,7 @@ Page({
         teamLeaderId: '',
         orgTeam: [],
         orgName: '',
+        orgId: '',
         teamCounts: '',
         docteams: [],
         selectorgShow: true,
@@ -24,8 +25,11 @@ Page({
         wx.setNavigationBarTitle({
             title: '选择家医'
         })
-        let params = [e.currentTarget.dataset.orgid]
-        util.commonAjax(params, 'pcn.teamService', 'getOrgVOByOrgId').then(res => {
+        let orgId = e.currentTarget.dataset.orgid
+        this.setData({
+            orgId: orgId
+        })
+        util.commonAjax([orgId], 'pcn.teamService', 'getOrgVOByOrgId').then(res => {
             if (res.code === 200) {
                 this.setData({
                     orgName: e.currentTarget.dataset.orgname,
@@ -79,6 +83,7 @@ Page({
             teamId: this.data.teamId,
             doctorNameAndteamName: this.data.name + ' ' + this.data.teamName,
             orgName: this.data.orgName,
+            orgId: this.data.orgId,
             teamLeaderId: this.data.teamLeaderId
         }
         wx.navigateBack({

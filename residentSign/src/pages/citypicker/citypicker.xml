@@ -16,7 +16,7 @@
 
     <view class='areaAjaxResult' wx:if='{{areaAjaxResultShow}}'>
         <block wx:for='{{areaAjaxResultArr}}'>
-            <view class='item' bindtap='selectedStreet' data-region='{{item}}'>{{item.regionText}}</view>
+            <view class='item' bindtap='selectedStreet' data-selectedstreet='{{item}}'>{{item.streetText}}</view>
         </block>
     </view>
 </view>

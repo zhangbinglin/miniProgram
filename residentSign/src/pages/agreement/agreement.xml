@@ -1,3 +1,5 @@
-<view class="container">
-  <view class='agreementContent'>{{agreementContent}}</view>
-</view>
+<!-- 引入模板必须是以wxml结尾的文件，即编译后的文件 -->
+<!-- <import src="../wxParse/wxParse.wxml" />
+<view class='agreementContent'>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view> -->
