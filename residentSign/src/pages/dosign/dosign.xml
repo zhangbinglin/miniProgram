@@ -64,31 +64,17 @@
                 </view>
             </view>
 
-            <view class="weui-cell weui-cell_select">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                    <view class="weui-label">国家/地区</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-                        <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
-                    </picker>
-                </view>
-            </view>
-
-            <checkbox-group bindchange="bindAgreeChange">
-                <label class="weui-agree" for="weuiAgree">
-                    <view class="weui-agree__text">
-                        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
-                        <view class="weui-agree__checkbox-icon">
-                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
-                        </view>
-                        已阅读并同意<navigator url="" class="weui-agree__link">《签约协议》</navigator>
-                    </view>
+            <checkbox-group bindchange="bindAgreeChange" class='agreeCheckbox'>
+                <label class="checkbox">
+                    <checkbox disabled="{{isDisabled}}" value='' />
                 </label>
+                <view class='agree-text-container'>
+                  已阅读并同意<text class='agree-text' bindtap='checkAgreement'>《签约协议》</text>
+                </view>
             </checkbox-group>
 
             <view class='submitBtn'>
-                <button class="weui-btn" type="primary" plain="true" size="mini">提交申请</button>
+                <button disabled='{{!isAgree}}' class="weui-btn" type="primary" plain="true" size="mini" bindtap='submit'>提交申请</button>
             </view>
         </view>
     </view>

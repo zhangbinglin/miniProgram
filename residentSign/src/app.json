@@ -1,20 +1,20 @@
 {
-    "pages": [
-        "pages/selectpackages/selectpackages",
-        "pages/signstatus/signstatus",
-
-        "pages/selectdoctorteam/selectdoctorteam",
-        "pages/dosign/dosign",
-        "pages/city-picker/city-picker",
-        "pages/homedocteam/homedocteam",
-        "pages/docteamdetail/docteamdetail",
-        "pages/signinginfo/signinginfo"
-    ],
-    "window": {
-        "backgroundTextStyle": "dark",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "welcome",
-        "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": false
-    }
+  "pages": [
+    "pages/signstatus/signstatus",
+    "pages/selectpackages/selectpackages",
+    "pages/selectdoctorteam/selectdoctorteam",
+    "pages/dosign/dosign",
+    "pages/citypicker/citypicker",
+    "pages/homedocteam/homedocteam",
+    "pages/docteamdetail/docteamdetail",
+    "pages/agreement/agreement",
+    "pages/signinginfo/signinginfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "welcome",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  }
 }

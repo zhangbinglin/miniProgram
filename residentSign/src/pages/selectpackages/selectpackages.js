@@ -5,41 +5,49 @@ let util = require('../../utils/util.js')
 Page({
   data: {
     packagesArr: [],
-    keepResultObj: {}
+    keepResultObj: {},
+    selectedPackagesCount: ''
   },
   checkboxChange(e) {
-      let spId = e.currentTarget.dataset.spid
-      let packageInfo = e.currentTarget.dataset.packageinfo
-      if(e.detail.value.length) {
-          this.data.keepResultObj[spId] = packageInfo
+    let spId = e.currentTarget.dataset.spid
+    let packageInfo = e.currentTarget.dataset.packageinfo
+    if (e.detail.value.length) {
+      this.data.keepResultObj[spId] = packageInfo
     } else {
-        delete this.data.keepResultObj[spId]
+      delete this.data.keepResultObj[spId]
     }
-    console.log(this.data.keepResultObj)
+    if(Object.keys(this.data.keepResultObj).length) {
+      this.setData({
+        selectedPackagesCount: Object.keys(this.data.keepResultObj).length
+      })
+    } else {
+      this.setData({
+        selectedPackagesCount: ''
+      })
+    }
   },
   selectedPackages(e) {
-      if(Object.keys(this.data.keepResultObj).length) {
-          app.globalData.selectedPackagesInfo = this.data.keepResultObj
-          wx.navigateBack({})
-      } else {
-          wx.showModal({
-              title: '提示',
-              content: '请至少选择一个服务包',
-              showCancel: false
-          })
-      }
-      console.log(app.globalData);
+    if (Object.keys(this.data.keepResultObj).length) {
+      app.globalData.selectedPackagesInfo = this.data.keepResultObj
+      wx.navigateBack({})
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请至少选择一个服务包',
+        showCancel: false
+      })
+    }
+    console.log(app.globalData);
   },
   onLoad(options) {
     let params = [{
-    //   "spId": options.teamId,
-      "spId": '11',
+      "spId": options.teamId,
       "spType": "2"
     }]
     util.commonAjax(params, 'pcn.pcnSpPackService', 'spPackList').then(res => {
       if (res.code === 200) {
         this.setData({
-            packagesArr: res.body
+          packagesArr: res.body
         })
       }
     })

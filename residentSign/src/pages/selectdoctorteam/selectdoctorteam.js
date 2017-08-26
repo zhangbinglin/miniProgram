@@ -7,6 +7,7 @@ Page({
         name: '',
         teamId: '',
         teamName: '',
+        teamLeaderId: '',
         orgTeam: [],
         orgName: '',
         teamCounts: '',
@@ -53,6 +54,7 @@ Page({
                     orgName: teamInfo.orgName,
                     teamName: teamInfo.teamName,
                     teamId: teamInfo.teamId,
+                    teamLeaderId: res.body.teamLeaderId,
                     signNum: res.body.signNum,
                     phoneNo: res.body.docInfo.phoneNo,
                     docNum: res.body.docNum,
@@ -63,6 +65,7 @@ Page({
                     name: res.body.docInfo.name,
                     teamId: teamInfo.teamId,
                     teamName: teamInfo.teamName,
+                    teamLeaderId: res.body.teamLeaderId,
                     doctorDetailInfoObj: obj,
                     selectorgShow: false,
                     homedocteamShow: false,
@@ -75,7 +78,8 @@ Page({
         app.globalData.doctorTeamInfo = {
             teamId: this.data.teamId,
             doctorNameAndteamName: this.data.name + ' ' + this.data.teamName,
-            orgName: this.data.orgName
+            orgName: this.data.orgName,
+            teamLeaderId: this.data.teamLeaderId
         }
         wx.navigateBack({
             //   delta: 2

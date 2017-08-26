@@ -16,6 +16,8 @@
         </view>
     </view>
     <view class='selectBtn' bindtap='selectedPackages'>
-        <button class="weui-btn" size="mini">确定</button>
+        <button class="weui-btn" size="mini">
+          确定<text wx:if='{{selectedPackagesCount}}'>({{selectedPackagesCount}})</text>
+        </button>
     </view>
 </view>

@@ -27,6 +27,7 @@ App({
     userInfo: null,
     userAddressInfo: {},
     doctorTeamInfo: {},
-    selectedPackagesInfo: {}
+    selectedPackagesInfo: {},
+    agreementContent: {}
   }
 })
