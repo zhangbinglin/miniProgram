@@ -7,7 +7,7 @@ function commonAjax(params, ServiceId, ServiceMethod) {
       method: 'POST',
       data: params,
       header: {
-        "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
+        "X-Access-Token": '23580d58-3a39-4b96-82ca-902345eacca6',
         "X-Service-Id": ServiceId,
         "X-Service-Method": ServiceMethod,
         "Content-Type": "application/json"
@@ -26,7 +26,7 @@ function commonAjaxKy(params, ServiceId, ServiceMethod) {
       method: 'POST',
       data: {},
       header: {
-        "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
+        "X-Access-Token": '23580d58-3a39-4b96-82ca-902345eacca6',
         "X-Service-Id": ServiceId,
         "X-Service-Method": ServiceMethod,
         "Content-Type": "application/json"
@@ -44,7 +44,7 @@ function areaAjax(params) {
         url: `${base}/pcn-core/dataProxyController/dictionaryServiceProxy?short_url=hcn.base.dictionary.region.dic?${params}`,
         data: {},
         header: {
-          "X-Access-Token": '55cf67c7-0933-4ed3-b5f6-6fb6e52467bc',
+          "X-Access-Token": '23580d58-3a39-4b96-82ca-902345eacca6',
           "Content-Type": "application/json"
         },
         success: function(res, error) {

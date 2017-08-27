@@ -4,6 +4,7 @@
         font-size: @fontsize;
         padding: 20rpx;
         border-bottom: 1px solid #ddd;
+        color: #333;
     }
     .signingAndSigned, .waitForSign {
       .cicleBody {
@@ -11,6 +12,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         .items {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items:center;
@@ -24,6 +26,20 @@
             .personName {
                 margin-top: 20rpx;
                 font-size: @fontsize;
+            }
+            .signStatusBadge {
+                position: absolute;
+                top: 75rpx;
+                .weui-badge {
+                    font-size: 28rpx;
+                    background-color: #67cc70;
+                }
+                .weui-badge.signing {
+                    background-color: #f1c30c;
+                }
+            }
+            .signStatusBadge::before {
+                border: none;
             }
           }
         .addIcon {
@@ -49,6 +65,7 @@
         padding: 30rpx;
         line-height: 1.5;
         text-align: center;
+        color: #333;
     }
     .signProcess {
         margin-top: 20rpx;

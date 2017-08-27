@@ -1,5 +1,6 @@
 const app = getApp()
 let util = require('../../utils/util.js')
+let tcity = require("../../utils/citys.js")
 Page({
     data: {
         dosignPersonInfo: {},
@@ -11,7 +12,7 @@ Page({
         districtCode: '',
         streetCode: '',
         areaTextDetail: '',
-        addressValue: '请输入',
+        addressValue: '',
         doctorNameAndteamName: '请选择',
         orgName: '请输入',
         orgId: '',
@@ -177,7 +178,6 @@ Page({
         let year = now.getFullYear()
         let month = now.getMonth() + 1
         let date = now.getDate()
-        let day = now.getDay()
         let hour = now.getHours()
         let minu = now.getMinutes()
         let sec = now.getSeconds()
@@ -197,10 +197,35 @@ Page({
                 success(res) {
                     if (res.confirm) {
                         resolve()
-                    } else if (res.cancel) {
-                        reject()
-                    }
+                    } else if (res.cancel) {}
                 }
+            })
+        })
+    },
+    getDefaultAddress() {
+        let that = this
+        tcity.init(that)
+        let addressDic = that.data.cityData
+        let personInfo = this.data.dosignPersonInfo
+        let province = addressDic.filter(item => {
+            return item.code === personInfo.province.slice(0,6)
+        })
+        let city = province[0].sub.filter(item => {
+            return item.code === personInfo.city.slice(0,6)
+        })
+        let district = city[0].sub.filter(item => {
+            return item.code === personInfo.district.slice(0,6)
+        })
+        let params = `parentKey=${personInfo.district}&sliceType=4`
+        let street = []
+        util.areaAjax(params).then(res => {
+            street = res.items.filter(item => {
+                return item.key === personInfo.street
+            })
+        }).then(() => {
+            let defaultAddress = province[0].name + city[0].name + district[0].name + street[0].text +  personInfo.address
+            this.setData({
+                addressValue: defaultAddress
             })
         })
     },
@@ -241,6 +266,8 @@ Page({
                 streetCode: gUserAddressInfo.streetCode,
                 areaTextDetail: gUserAddressInfo.areaTextDetail
             })
+        } else {
+            this.getDefaultAddress()
         }
         if (app.globalData.doctorTeamInfo.teamId) {
             let gDoctorTeamInfo = app.globalData.doctorTeamInfo

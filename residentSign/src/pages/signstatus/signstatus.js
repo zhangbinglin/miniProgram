@@ -15,7 +15,7 @@ Page({
     })
   },
   onLoad() {
-    let params = ["hcn.shenzhen", '9fa92b25-42f4-4895-b253-d5424fc7d72d']
+    let params = ["hcn.shenzhen", 'cec402c4-4693-4d28-a0c8-6684a1a33dec']
     util.commonAjaxKy(JSON.stringify(params), 'pcn.residentSignService', 'queryFamily')
       .then(res => {
         if (res.code === 200) {
