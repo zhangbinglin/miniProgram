@@ -16,17 +16,15 @@ Page({
   },
   tapSigningOrSigned(e) {
       let personInfo = e.currentTarget.dataset.personinfo
-    //   wx.setStorageSync('dosignPersonInfo', JSON.stringify(personInfo))
       if(personInfo.status === '1') {
           wx.navigateTo({
             url: '../signinginfo/signinginfo?personinfo=' + JSON.stringify(personInfo)
           })
       } else if (personInfo.status === '2') {
           wx.navigateTo({
-            url: '../signinginfo/signinginfo'
+            url: '../hadsigned/hadsigned?personinfo=' + JSON.stringify(personInfo)
           })
       }
-
   },
   onLoad() {
     let params = ["hcn.shenzhen", 'cec402c4-4693-4d28-a0c8-6684a1a33dec']
@@ -34,7 +32,6 @@ Page({
       .then(res => {
         if (res.code === 200) {
           console.log(res.body)
-          // this.data.queryFamilyArr = res.body
           this.setData({
             queryFamilyArr: res.body
           })

@@ -1,20 +1,18 @@
+// 获取全局应用程序实例对象
 // const app = getApp()
 let util = require('../../utils/util.js')
-let tcity = require("../../utils/citys.js")
+// let tcity = require("../../utils/citys.js")
 Page({
     data: {
-        signingPersonInfo: {},
         imgReqUrl: 'http://122.224.131.235:9088/hcn-web/upload/',
-        sexImg: ['../../assets/img/zbl_male.png', '../../assets/img/zbl_female.png'],
-        personAge: '',
-        addressValue: '',
-        doctorNameAndteamName: '',
-        orgName: '',
+        signedPersonInfo: {},
         applyId: '',
-        applyDt: '',
-        packagesName: '',
         applySignInfo: {},
         applyPackageInfo: [],
+        doctorNameAndteamName: '',
+        orgName: '',
+        hadsignedArr: [],
+        signDate: '',
         signdetailShow: true,
         docteamdetailShow: false,
         packagesinfoShow: false,
@@ -24,12 +22,31 @@ Page({
     onLoad(options) {
         let personInfo = JSON.parse(options.personinfo)
         this.setData({
-            signingPersonInfo: personInfo,
-            personAge: new Date().getFullYear() - personInfo.dob.split('-')[0],
+            signedPersonInfo: personInfo,
             applyId: personInfo.applyId
         })
-        this.getDefaultAddress()
+        this.queryFamily()
         this.getSignRecordDetail()
+    },
+    tapSignedPerson(e) {
+        this.setData({
+            applyId: e.currentTarget.dataset.item.applyId
+        })
+        this.getSignRecordDetail()
+    },
+    queryFamily() {
+        let params = ["hcn.shenzhen", 'cec402c4-4693-4d28-a0c8-6684a1a33dec']
+        util.commonAjaxKy(JSON.stringify(params), 'pcn.residentSignService', 'queryFamily')
+          .then(res => {
+            if (res.code === 200) {
+                let hadsignedArr = res.body.filter(item => {
+                    return item.status === '2'
+                })
+              this.setData({
+                hadsignedArr: hadsignedArr
+              })
+            }
+          })
     },
     getSignRecordDetail() {
         let params = [this.data.applyId]
@@ -38,17 +55,12 @@ Page({
                 if (res.code === 200) {
                     let applySignInfo = res.body.applySignInfo
                     let applyPackageInfo = res.body.applyPackageInfo
-                    let tempArr = []
-                    applyPackageInfo.forEach(item => {
-                        tempArr.push(item.serviceName)
-                    })
                     this.setData({
                         applySignInfo: applySignInfo,
                         applyPackageInfo: applyPackageInfo,
                         doctorNameAndteamName: applySignInfo.doctorName + ' ' + applySignInfo.teamName,
                         orgName: applySignInfo.orgName,
-                        applyDt: applySignInfo.applyDt,
-                        packagesName: tempArr.join(' ')
+                        signDate: res.body.signDate
                     })
                 }
             })
@@ -120,65 +132,21 @@ Page({
             docteamdetailShow: false
         })
     },
-    cancelSigning() {
-        this.toastModal('确认取消吗?', true).then(() => {
-            let params = [this.data.applyId]
-            util.commonAjax(params, 'pcn.residentSignService', 'cancelSign')
-                .then(res => {
-                    if(res.code === 200) {
-                        this.toastModal('取消成功', false).then(() => {
-                            wx.navigateBack({})
-                        })
-                    } else {}
-                })
-        })
-    },
-    toastModal(content, isShowCancel = false) {
-        return new Promise((resolve, reject) => {
-            wx.showModal({
-                title: '提示',
-                content: content,
-                showCancel: isShowCancel,
-                success(res) {
-                    if (res.confirm) {
-                        resolve()
-                    } else if (res.cancel) {}
-                }
-            })
-        })
-    },
-    getDefaultAddress() {
-        let that = this
-        tcity.init(that)
-        let addressDic = that.data.cityData
-        let personInfo = this.data.signingPersonInfo
-        let province = addressDic.filter(item => {
-            return item.code === personInfo.province.slice(0, 6)
-        })
-        let city = province[0].sub.filter(item => {
-            return item.code === personInfo.city.slice(0, 6)
-        })
-        let district = city[0].sub.filter(item => {
-            return item.code === personInfo.district.slice(0, 6)
-        })
-        let params = `parentKey=${personInfo.district}&sliceType=4`
-        let street = []
-        util.areaAjax(params).then(res => {
-            street = res.items.filter(item => {
-                return item.key === personInfo.street
-            })
-        }).then(() => {
-            let defaultAddress = province[0].name + city[0].name + district[0].name + street[0].text + personInfo.address
-            this.setData({
-                addressValue: defaultAddress
-            })
-        })
-    },
     onReady() {},
-    onShow() {
-        // TODO: onShow
-    },
+    onShow() {},
     onHide() {},
-    onUnload() {},
-    onPullDownRefresh() {}
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload() {
+        // TODO: onUnload
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh() {
+        // TODO: onPullDownRefresh
+    }
 })

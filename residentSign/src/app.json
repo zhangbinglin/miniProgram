@@ -9,7 +9,8 @@
     "pages/docteamdetail/docteamdetail",
     "pages/agreement/agreement",
     "pages/packagesinfo/packagesinfo",
-    "pages/signinginfo/signinginfo"
+    "pages/signinginfo/signinginfo",
+    "pages/hadsigned/hadsigned"
   ],
   "window": {
     "backgroundTextStyle": "dark",

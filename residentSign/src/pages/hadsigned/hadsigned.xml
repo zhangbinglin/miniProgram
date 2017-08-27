@@ -1,0 +1,53 @@
+<import src="../docteamdetail/docteamdetail.wxml" />
+<import src="../packagesinfo/packagesinfo.wxml" />
+<view class="container">
+    <view class='signedPage' wx:if='{{signdetailShow}}'>
+        <view class='cicleBody'>
+            <view class="items" wx:for='{{hadsignedArr}}'>
+                <image src="../../assets/img/zbl_avatar.png" wx:if='{{!item.avatar}}' bindtap='tapSignedPerson' data-item='{{item}}' class='personAvatar' />
+                <image src="{{imgReqUrl + item.avatar}}" wx:else bindtap='tapSignedPerson' data-item='{{item}}' class='personAvatar' />
+                <text class="personName">{{item.personName}}</text>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='selectedHomeDocteam'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">签约医生</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{doctorNameAndteamName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">签约机构</view>
+                <view class="weui-cell__ft">{{orgName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">签约周期</view>
+                <view class="weui-cell__ft">{{signDate}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='gotoSelectPackages'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">签约协议</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">请查看</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='selectedPackagesInfo'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">签约服务包</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">请查看</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='gotoSelectPackages'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">解除签约</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">一年只能解签四次</view>
+            </view>
+        </view>
+    </view>
+
+    <template is="docteamdetail" wx:if='{{docteamdetailShow}}' data='{{...doctorDetailInfoObj}}' />
+
+    <template is='packagesInfo' wx:if='{{packagesinfoShow}}' data='{{...packagesInfoObj}}' />
+</view>
