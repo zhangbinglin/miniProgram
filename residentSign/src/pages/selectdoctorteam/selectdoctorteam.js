@@ -18,9 +18,6 @@ Page({
         docteamdetailShow: false,
         doctorDetailInfoObj: {}
     },
-    // getCurrentPages(e) {
-    //   console.log(e);
-    // },
     selectedOrganization(e) {
         wx.setNavigationBarTitle({
             title: '选择家医'
@@ -90,9 +87,9 @@ Page({
             //   delta: 2
         })
     },
-    onLoad() {
+    onLoad(options) {
         let params = [{
-            "areaId": '440303001000'
+            "areaId": options.streetCode
         }]
         util.commonAjax(params, 'pcn.searchOrgDeptTeamService', 'queryOrgsByAreaId')
             .then(res => {
@@ -103,39 +100,9 @@ Page({
                 }
             })
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady() {
-        // TODO: onReady
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow() {
-        // TODO: onShow
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide() {
-        // TODO: onHide
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
-        // TODO: onUnload
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh() {
-        // TODO: onPullDownRefresh
-    }
+    onReady() {},
+    onShow() {},
+    onHide() {},
+    onUnload() {},
+    onPullDownRefresh() {}
 })

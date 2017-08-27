@@ -1,8 +1,8 @@
 <import src="../docteamdetail/docteamdetail.wxml" />
 <view class="container">
     <view class='selectorg' wx:if='{{selectorgShow}}'>
-        <view class="circleBody" wx:for='{{orgTeam}}'>
-            <text class="teamName" bindtap='selectedOrganization' data-orgid='{{item.orgId}}' data-orgname='{{item.orgName}}'>{{item.orgName}}</text>
+        <view class="circleBody" wx:for='{{orgTeam}}' bindtap='selectedOrganization' data-orgid='{{item.orgId}}' data-orgname='{{item.orgName}}'>
+            <text class="teamName">{{item.orgName}}</text>
             <view class="detail">
                 <image src="../../assets/img/zbl_docteam.png" />
                 <text>团队数 {{item.teamCounts}}</text>

@@ -19,6 +19,7 @@ Page({
         teamLeaderId: '',
         phoneNo: '',
         packagesName: '请查看',
+        packagesInfo: [],
         isAgree: false,
         isDisabled: true,
         doctorTeamMembers: [],
@@ -42,7 +43,7 @@ Page({
     gotoSelectHomeDoctor(e) {
         if (this.data.addressValue !== '请输入') {
             wx.navigateTo({
-                url: '../selectdoctorteam/selectdoctorteam'
+                url: '../selectdoctorteam/selectdoctorteam?streetCode=' + this.data.streetCode
             })
         } else {
             this.toastModal('请先输入地址')
@@ -126,33 +127,81 @@ Page({
                 "orgId": this.data.orgId,
                 "doctorId": this.data.teamLeaderId,
                 "contactName": "",
-                "applyDt": this.date, // ??
+                "applyDt": this.getCurrentDayTime(),
                 "applyUser": this.data.applyUserMpiId, //账号主体的mpiId
                 "contactPhone": ""
             },
-            "pcnApplyPack": 'packagesParamsArr' // ??
+            "pcnApplyPack": this.processSubmitPackagesInfo()
         }]
         console.log(params)
-        // util.commonAjax(params, 'pcn.residentSignService', 'confirmSign')
-        //     .then(res => {
-        //         if (res.code === 200) {
-        //             this.setData({
-        //                 isDisabled: true
-        //             })
-        //         } else if (res.code === 0) {
-        //             this.toastModal(res.msg)
-        //         } else if (res.code === 610) {
-        //             this.toastModal(res.msg)
-        //         } else {
-        //             this.toastModal('服务出错啦，请重试')
-        //         }
-        //     })
+        util.commonAjax(params, 'pcn.residentSignService', 'confirmSign')
+            .then(res => {
+                if (res.code === 200) {
+                    this.toastModal('提交成功')
+                        .then(() => {
+                            wx.navigateBack({})
+                        })
+                } else if (res.code === 0) {
+                    this.toastModal(res.msg)
+                        .then(() => {
+                            wx.navigateBack({})
+                        })
+                } else if (res.code === 610) {
+                    this.toastModal(res.msg)
+                        .then(() => {
+                            wx.navigateBack({})
+                        })
+                } else {
+                    this.toastModal('服务出错啦，请重试')
+                        .then(() => {
+                            wx.navigateBack({})
+                        })
+                }
+            })
+    },
+    processSubmitPackagesInfo() {
+        let resultArr = []
+        this.data.packagesInfo.forEach(item => {
+            resultArr.push({
+                serviceName: item.spPackName,
+                personGroup: item.suitableObject,
+                price: item.price,
+                serviceId: item.spPackId,
+                tenantId: "hcn.shenzhen"
+            })
+        })
+        return resultArr
+    },
+    getCurrentDayTime() {
+        let now = new Date()
+        let year = now.getFullYear()
+        let month = now.getMonth() + 1
+        let date = now.getDate()
+        let day = now.getDay()
+        let hour = now.getHours()
+        let minu = now.getMinutes()
+        let sec = now.getSeconds()
+        if (month < 10) month = "0" + month
+        if (date < 10) date = "0" + date
+        if (hour < 10) hour = "0" + hour
+        if (minu < 10) minu = "0" + minu
+        if (sec < 10) sec = "0" + sec
+        return year + "-" + month + "-" + date + " " + hour + ":" + minu + ":" + sec
     },
     toastModal(content) {
-        wx.showModal({
-            title: '提示',
-            content: content,
-            showCancel: false
+        return new Promise((resolve, reject) => {
+            wx.showModal({
+                title: '提示',
+                content: content,
+                showCancel: false,
+                success(res) {
+                    if (res.confirm) {
+                        resolve()
+                    } else if (res.cancel) {
+                        reject()
+                    }
+                }
+            })
         })
     },
     onLoad(options) {
@@ -215,6 +264,7 @@ Page({
             })
             this.setData({
                 packagesName: spPackNameArr.join(' '),
+                packagesInfo: tempArr,
                 isDisabled: false
             })
         }
