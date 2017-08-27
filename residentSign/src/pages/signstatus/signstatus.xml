@@ -25,8 +25,8 @@
       <view class='cicleBody'>
         <block wx:for="{{queryFamilyArrStatus12}}">
           <view class="items">
-            <image src="../../assets/img/zbl_avatar.png" wx:if='{{!item.avatar}}' id='{{index}}' bindtap='signingAndSigned' class='personAvatar'/>
-            <image src="{{imgReqUrl + item.avatar}}" wx:else id='{{index}}' bindtap='signingAndSigned' class='personAvatar'/>
+            <image src="../../assets/img/zbl_avatar.png" wx:if='{{!item.avatar}}' bindtap='tapSigningOrSigned' data-personinfo='{{item}}' class='personAvatar'/>
+            <image src="{{imgReqUrl + item.avatar}}" wx:else bindtap='tapSigningOrSigned' data-personinfo='{{item}}' class='personAvatar'/>
             <text class="personName">{{item.personName}}</text>
             <view class="weui-cell weui-cell_access signStatusBadge">
                 <view class="weui-cell__bd">
@@ -34,8 +34,6 @@
                     <view class="weui-badge" wx:if='{{item.status === "2"}}'>已签约</view>
                 </view>
             </view>
-            <!-- <mt-badge size="small" color="#888" v-if='item.status === "1"'>签约中</mt-badge>
-                  <mt-badge size="small" color="#888" v-if='item.status === "2"' class="badgeGreen">已签约</mt-badge> -->
           </view>
         </block>
       </view>

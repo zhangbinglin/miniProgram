@@ -1,0 +1,18 @@
+<template name='packagesInfo'>
+<view class="container">
+    <view class='packages'>
+        <view class='item' wx:for='{{packagesArr}}'>
+            <view class="introduction">
+                <text class="title">{{item.serviceName}}</text>
+                <text class="forWho hideMore">适合人群编号: {{item.personGroup}}</text>
+            </view>
+            <view class='detailBtn'>
+                <button class="weui-btn" size="mini">详情</button>
+            </view>
+        </view>
+    </view>
+    <view class='selectBtn' bindtap='goBack'>
+        <button class="weui-btn" size="mini">确定</button>
+    </view>
+</view>
+</template>

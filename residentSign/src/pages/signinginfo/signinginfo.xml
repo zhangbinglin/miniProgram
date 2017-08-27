@@ -1,4 +1,84 @@
-<!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
+<import src="../docteamdetail/docteamdetail.wxml" />
+<import src="../packagesinfo/packagesinfo.wxml" />
 <view class="container">
-  <text class="title">{{ title }}</text>
+    <view class='signinginfo' wx:if='{{signdetailShow}}'>
+        <view class="tobechecked">签约状态:待确认</view>
+        <view class="personInfo">
+            <view class="left-avatar">
+                <image wx:if='{{!dosignPersonInfo.avatar}}' src="../../assets/img/zbl_avatar.png" class='personAvatar' />
+                <image wx:else src="{{imgReqUrl + dosignPersonInfo.avatar}}" class='personAvatar' />
+            </view>
+            <view class="right-info">
+                <view class="withline">
+                    <text class="name">{{signingPersonInfo.personName}}</text>
+                    <text class="age">{{personAge}}岁</text>
+                    <image src="{{signingPersonInfo.sex == '1'?sexImg[0]:sexImg[1]}}" class="sex" />
+                </view>
+                <view>
+                    <text class="grey">证件类型</text>
+                    <text>{{signingPersonInfo.idType === '01'?'居民身份证':'其他'}}</text>
+                </view>
+                <view>
+                    <text class="grey">证件号码</text>
+                    <text>{{signingPersonInfo.idOrNo}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="divide"></view>
+        <view class='contactPhoneAddress'>
+            <view class="left">
+                <text>联系方式</text>
+                <text>居住地址</text>
+            </view>
+            <view class="right">
+                <text>{{signingPersonInfo.phoneNo}}</text>
+                <text>{{addressValue}}</text>
+            </view>
+        </view>
+        <view class="divide"></view>
+        <view class="weui-cells weui-cells_after-title" bindtap='selectedHomeDocteam'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">家庭医生</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{doctorNameAndteamName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='selectedPackagesInfo'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">服务包</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{packagesName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title" bindtap='gotoSelectPackages'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">签约协议</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">查看</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">签约机构</view>
+                <view class="weui-cell__ft">{{orgName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">签约周期</view>
+                <view class="weui-cell__ft">1年</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">申请时间</view>
+                <view class="weui-cell__ft">{{applyDt}}</view>
+            </view>
+        </view>
+        <view class='btnGroup'>
+            <button class="weui-btn" size="mini" bindtap='editSigning'>修改</button>
+            <button class="weui-btn red" size="mini" bindtap='cancelSigning'>取消</button>
+        </view>
+    </view>
+
+    <template is="docteamdetail" wx:if='{{docteamdetailShow}}' data='{{...doctorDetailInfoObj}}' />
+
+    <template is='packagesInfo' wx:if='{{packagesinfoShow}}' data='{{...packagesInfoObj}}' />
 </view>
