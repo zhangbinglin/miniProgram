@@ -140,22 +140,30 @@ Page({
                 if (res.code === 200) {
                     this.toastModal('提交成功')
                         .then(() => {
-                            wx.navigateBack({})
+                            wx.reLaunch({
+                              url: '../signstatus/signstatus'
+                            })
                         })
                 } else if (res.code === 0) {
                     this.toastModal(res.msg)
                         .then(() => {
-                            wx.navigateBack({})
+                            wx.reLaunch({
+                              url: '../signstatus/signstatus'
+                            })
                         })
                 } else if (res.code === 610) {
                     this.toastModal(res.msg)
                         .then(() => {
-                            wx.navigateBack({})
+                            wx.reLaunch({
+                              url: '../signstatus/signstatus'
+                            })
                         })
                 } else {
                     this.toastModal('服务出错啦，请重试')
                         .then(() => {
-                            wx.navigateBack({})
+                            wx.reLaunch({
+                              url: '../signstatus/signstatus'
+                            })
                         })
                 }
             })

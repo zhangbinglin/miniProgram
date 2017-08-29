@@ -127,7 +127,9 @@ Page({
                 .then(res => {
                     if(res.code === 200) {
                         this.toastModal('取消成功', false).then(() => {
-                            wx.navigateBack({})
+                            wx.reLaunch({
+                              url: '../signstatus/signstatus'
+                            })
                         })
                     } else {}
                 })
